@@ -15,6 +15,6 @@ namespace InventoryTest
         public Sprite Icon => _icon;
         //public abstract InventoryItemModel GetModel ();
         public abstract ItemType GetItemType();
-        public abstract void SetData(InventoryItemModel model);
+        //public abstract void SetData(InventoryItemModel model);
     }
 }

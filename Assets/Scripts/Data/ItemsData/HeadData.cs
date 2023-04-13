@@ -17,12 +17,12 @@ namespace InventoryTest
             return ItemType.Head;
         }
 
-        public override void SetData(InventoryItemModel model)
+        /*public override void SetData(InventoryItemModel model)
         {
             HeadModel data = (HeadModel)model;
             _weight = data.Weight;
             _icon = data.Icon;
             _defence = data.Deffence;
-        }
+        } */
     }
 }

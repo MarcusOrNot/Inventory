@@ -7,6 +7,7 @@ namespace InventoryTest
 {
     public class AmmoItemController : InventoryItemController, IAmmo
     {
+        private AmmoModel _ammoData;
         private AmmoUseCase _ammoUseCase;
         private void Awake()
         {
@@ -14,12 +15,25 @@ namespace InventoryTest
         }
         public AmmoModel GetAmmoData()
         {
-            return (AmmoModel)ItemData;
+            return _ammoData;
         }
 
-        public override bool IsSameItemClass(InventoryItemController item)
+        public override void SetData<T>(T itemData)
         {
-            return ((item is AmmoItemController) && (((AmmoModel) item.ItemData).WeaponAmmo == GetAmmoData().WeaponAmmo));
+            _ammoData = itemData as AmmoModel;
+            RefreshView();
+        }
+
+        protected override InventoryItemModel GetData()
+        {
+            return _ammoData;
+        }
+
+        public override bool IsSameItemClass(GameObject item)
+        {
+            IAmmo current = item.GetComponent<IAmmo>();
+            if (current != null && current.GetAmmoData().AmmoType == _ammoData.AmmoType) return true;
+            return false;
         }
 
         /*public override bool IsSameItemClass(InventoryItemModel model)

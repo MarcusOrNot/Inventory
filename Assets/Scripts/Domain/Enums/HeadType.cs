@@ -6,7 +6,7 @@ namespace InventoryTest
 {
     public enum HeadType
     {
-        Cap,
-        Helmet
+        Cap = 0,
+        Helmet = 1
     }
 }

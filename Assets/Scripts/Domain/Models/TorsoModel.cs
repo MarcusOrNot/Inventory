@@ -8,7 +8,7 @@ namespace InventoryTest
     {
         public TorsoType Torso;
         public int Deffence;
-        public TorsoModel(TorsoType torso, int deffence, Sprite icon, float weight, int count) : base(ItemType.Torso, icon , weight, count)
+        public TorsoModel(TorsoType torso, int deffence, Sprite icon, float weight, int count) : base(ItemType.Torso, (int) torso, icon , weight, count)
         {
             Torso = torso;
             Deffence = deffence;

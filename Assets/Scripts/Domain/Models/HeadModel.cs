@@ -8,7 +8,7 @@ namespace InventoryTest
     {
         public HeadType Head;
         public int Deffence;
-        public HeadModel(HeadType head, int deffence, Sprite icon, float weight, int count) : base(ItemType.Head, icon, weight, count)
+        public HeadModel(HeadType head, int deffence, Sprite icon, float weight, int count) : base(ItemType.Head, (int) head, icon, weight, count)
         {
             Head = head;
             Deffence = deffence;

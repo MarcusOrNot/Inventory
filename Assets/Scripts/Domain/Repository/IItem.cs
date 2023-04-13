@@ -6,7 +6,7 @@ namespace InventoryTest
 {
     public interface IItem
     {
-        public InventoryItemModel ItemData { get; set; }
+        public InventoryItemModel ItemData { get; }
         public void RefreshView();
         public void DestroyItem();
     }

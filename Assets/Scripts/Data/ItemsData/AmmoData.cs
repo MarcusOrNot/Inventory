@@ -7,10 +7,10 @@ namespace InventoryTest
     [CreateAssetMenu(fileName = "Ammo Data", menuName = "Inventory/Ammo")]
     public class AmmoData : InventoryItemData
     {
-        [SerializeField] private WeaponType _weaponAmmo;
+        [SerializeField] private AmmoType _ammoType;
         [SerializeField] private int _maxCount;
 
-        public WeaponType WeaponAmmo => _weaponAmmo;
+        public AmmoType AmmoType => _ammoType;
         public int MaxCount => _maxCount;
 
         public override ItemType GetItemType()
@@ -18,13 +18,13 @@ namespace InventoryTest
             return ItemType.Ammo;
         }
 
-        public override void SetData(InventoryItemModel model)
+        /*public override void SetData(InventoryItemModel model)
         {
             AmmoModel data = (AmmoModel)model;
             _weight = data.Weight;
             _icon = data.Icon;
-            _weaponAmmo = data.WeaponAmmo;
+            _ammoType = data.AmmoType;
             _maxCount = data.MaxCount;
-        }
+        } */
     }
 }

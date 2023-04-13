@@ -6,11 +6,11 @@ namespace InventoryTest
 {
     public class AmmoModel : InventoryItemModel
     {
-        public WeaponType WeaponAmmo;
+        public AmmoType AmmoType;
         public int MaxCount;
-        public AmmoModel(WeaponType weaponAmmo, int maxCount, Sprite icon, float weight, int count) : base(ItemType.Ammo, icon, weight, count)
+        public AmmoModel(AmmoType ammoType, int maxCount, Sprite icon, float weight, int count) : base(ItemType.Ammo, (int) ammoType, icon, weight, count)
         {
-            WeaponAmmo = weaponAmmo;
+            AmmoType = ammoType;
             MaxCount = maxCount;
         }
     }

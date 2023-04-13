@@ -13,7 +13,7 @@ namespace InventoryTest
         /*public WeaponType Weapon => _weapon;
         public int Damage => _damage; */
 
-        public WeaponModel(WeaponType weapon, int damage, Sprite icon, float weight, int count) : base(ItemType.Weapon, icon, weight, count)
+        public WeaponModel(WeaponType weapon, int damage, Sprite icon, float weight, int count) : base(ItemType.Weapon, (int) weapon, icon, weight, count)
         {
             Weapon = weapon;
             Damage = damage;

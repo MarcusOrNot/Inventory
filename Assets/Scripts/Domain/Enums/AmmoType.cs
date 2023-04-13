@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace InventoryTest
 {
-    public enum TorsoType
+    public enum AmmoType
     {
-        Jacket = 0,
-        BodyArmor = 1
+        GunAmmo = 0,
+        RifleAmmo = 1
     }
 }

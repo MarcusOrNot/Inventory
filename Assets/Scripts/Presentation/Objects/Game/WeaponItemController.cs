@@ -6,22 +6,29 @@ namespace InventoryTest
 {
     public class WeaponItemController : InventoryItemController, IWeapon
     {
+        private WeaponModel _weaponData;
 
         public WeaponModel GetWeaponData()
         {
-            return (WeaponModel)ItemData;
+            return _weaponData;
         }
 
-        public override bool IsSameItemClass(InventoryItemController item)
+        public override bool IsSameItemClass(GameObject item)
         {
-            //WeaponItemController some = (WeaponItemController) item;
-            //Debug.Log("Weapon is "+some.GetWeaponData().Weapon.ToString());
-            return (item is WeaponItemController && ((WeaponItemController) item).GetWeaponData().Weapon == GetWeaponData().Weapon);
+            IWeapon current = item.GetComponent<IWeapon>();
+            if (current != null && current.GetWeaponData().Weapon == _weaponData.Weapon) return true;
+            return false;
         }
 
-        /*public override bool IsSameItemClass(InventoryItemModel model)
+        public override void SetData<T>(T itemData)
         {
-            return (model is WeaponModel); 
-        } */
+            _weaponData = itemData as WeaponModel;
+            RefreshView();
+        }
+
+        protected override InventoryItemModel GetData()
+        {
+            return _weaponData;
+        }
     }
 }

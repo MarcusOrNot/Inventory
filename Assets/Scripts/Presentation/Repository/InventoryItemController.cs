@@ -10,32 +10,36 @@ namespace InventoryTest
     {
         [SerializeField] private Image _icon;
         [SerializeField] private Text _countText;
-        private InventoryItemModel _itemData;
+        //private InventoryItemModel _itemData;
         private ISlot _currentParent = null;
 
-        public void SetData(InventoryItemModel itemData)
+        /*public void SetData(InventoryItemModel itemData)
         {
             _itemData = itemData;
             RefreshView();
-        }
+        }*/
+
+        public abstract void SetData<T>(T itemData) where T : InventoryItemModel;
+        protected abstract InventoryItemModel GetData();
+
         public void RefreshView()
         {
-            _icon.sprite = _itemData.Icon;
-            _countText.text = _itemData.Count.ToString();
-            _countText.gameObject.SetActive(_itemData.Count > 1);
+            _icon.sprite = ItemData.Icon;
+            _countText.text = ItemData.Count.ToString();
+            _countText.gameObject.SetActive(ItemData.Count > 1);
         }
         //public InventoryItemModel ItemData => _itemData;
 
         public InventoryItemModel ItemData { 
-            get => _itemData; 
-            set
+            get => GetData(); 
+            /*set
             {
                 _itemData = value;
                 //RefreshData();
-            } 
+            } */
         }
 
-        public abstract bool IsSameItemClass(InventoryItemController item);
+        public abstract bool IsSameItemClass(GameObject item);
 
         public void DestroyItem()
         {
@@ -73,14 +77,24 @@ namespace InventoryTest
 
         public bool PlaceItem(GameObject objectToPlace)
         {
+            //WeaponItemController item = GetComponent<WeaponItemController>();
+            //if (item != null)
+              //  Debug.Log(item.GetWeaponData().Weapon.ToString());
+
             //Debug.Log(objectToPlace.name);
-            /*InventoryItemController item = objectToPlace.GetComponent<InventoryItemController>();
-            if (item != null && IsSameItemClass(item))
+            //InventoryItemController item = objectToPlace.GetComponent<InventoryItemController>();
+            if (IsSameItemClass(objectToPlace) && objectToPlace.GetComponent<IItem>()!=null)
             {
-                item.DestroyItem();
+                IItem itemElem = objectToPlace.GetComponent<IItem>();
+                //if (item is WeaponItemController)
+                //  Debug.Log(((WeaponItemController) item).ItemData.Item.ToString());
+                ItemData.Count += itemElem.ItemData.Count;
+                RefreshView();
+                objectToPlace.GetComponent<IItem>().DestroyItem();
                 return true;
-            }*/
-            Debug.Log("In process!");
+                //return false;
+            }
+            //Debug.Log("In process!");
             return false;
         }
     }

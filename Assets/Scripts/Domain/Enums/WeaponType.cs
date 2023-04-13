@@ -6,7 +6,7 @@ namespace InventoryTest
 {
     public enum WeaponType
     {
-        Gun,
-        AssaultRifle
+        Gun = 0,
+        AssaultRifle = 1
     }
 }

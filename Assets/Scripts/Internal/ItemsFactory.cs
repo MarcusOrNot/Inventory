@@ -7,38 +7,49 @@ namespace InventoryTest
 {
     public class ItemsFactory
     {
+        [Inject] private ItemsInfo _itemsInfo;
         [Inject] private WeaponItemController _weaponPrefub;
         [Inject] private AmmoItemController _ammoPrefub;
         [Inject] private HeadItemController _headPrefub;
         [Inject] private TorsoItemController _torsoPrefub;
 
-        private GameObject InstantiateObject(GameObject prefub, SlotManager inSlot)
+        private T InstantiateObject<T>(GameObject prefub, SlotManager inSlot) where T: InventoryItemController
         {
-            var res = GameObject.Instantiate(prefub, inSlot.transform);
-            inSlot.PutItem(res.GetComponent<InventoryItemController>());
+            var resObject = GameObject.Instantiate(prefub, inSlot.transform);
+            var res = resObject.GetComponent<T>();
+            inSlot.PutItem(res);
             return res;
         }
 
-        public InventoryItemController InstantiateItemFromModel(InventoryItemModel modelData, SlotManager inSlot)
+        public void InstantiateItemFromModel(InventoryItemModel modelData, SlotManager inSlot)
         {
-            InventoryItemController item = null;
             switch (modelData.Item)
             {
                 case ItemType.Weapon:
-                    item = InstantiateObject(_weaponPrefub.gameObject, inSlot).GetComponent<WeaponItemController>();
+                    WeaponItemController weaponItem = InstantiateObject<WeaponItemController>(_weaponPrefub.gameObject, inSlot);
+                    //WeaponModel some = (WeaponModel)modelData;
+                    //WeaponModel newWeapon = new WeaponModel(WeaponType.AssaultRifle, 10, modelData.Icon, modelData.Weight, modelData.Count);
+                    weaponItem.SetData(_itemsInfo.GetDataByType<WeaponModel>(modelData));
                     break;
                 case ItemType.Ammo:
-                    item = InstantiateObject(_ammoPrefub.gameObject, inSlot).GetComponent<AmmoItemController>();
+                    //item = InstantiateObject<AmmoItemController>(_ammoPrefub.gameObject, inSlot).GetComponent<AmmoItemController>();
+                    //item.SetData(modelData);
+                    AmmoItemController ammoItem = InstantiateObject<AmmoItemController>(_ammoPrefub.gameObject, inSlot);
+                    ammoItem.SetData(_itemsInfo.GetDataByType<AmmoModel>(modelData));
                     break;
                 case ItemType.Head:
-                    item = InstantiateObject(_headPrefub.gameObject, inSlot).GetComponent<HeadItemController>();
+                    //item = InstantiateObject<HeadItemController>(_headPrefub.gameObject, inSlot).GetComponent<HeadItemController>();
+                    //item.SetData(modelData);
+                    HeadItemController headItem = InstantiateObject<HeadItemController>(_headPrefub.gameObject, inSlot);
+                    headItem.SetData(_itemsInfo.GetDataByType<HeadModel>(modelData));
                     break;
                 case ItemType.Torso:
-                    item = InstantiateObject(_torsoPrefub.gameObject, inSlot).GetComponent<TorsoItemController>();
+                    //item = InstantiateObject<TorsoItemController>(_torsoPrefub.gameObject, inSlot).GetComponent<TorsoItemController>();
+                    //item.SetData(modelData);
+                    TorsoItemController torsoItem = InstantiateObject<TorsoItemController>(_torsoPrefub.gameObject, inSlot);
+                    torsoItem.SetData(_itemsInfo.GetDataByType<TorsoModel>(modelData));
                     break;
             }
-            item.SetData(modelData);
-            return item;
         }
     }
 }

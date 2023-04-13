@@ -42,6 +42,8 @@ namespace InventoryTest
                     if (_inventoryStorage.Items[i] != null && _inventoryStorage.Items[i].Item != ItemType.None)
                     {
                         _itemsFactory.InstantiateItemFromModel(_inventoryStorage.Items[i], slot);
+                        //if (slot.GetItem() is WeaponItemController)
+                          //  Debug.Log(((WeaponItemController) slot.GetItem()).GetWeaponData().Weapon.ToString());
                     }
                 }
 

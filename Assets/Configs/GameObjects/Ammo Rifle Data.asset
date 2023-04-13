@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e822a839f8600a44cbdc32b83ed8b7df, type: 3}
   m_Name: Ammo Rifle Data
   m_EditorClassIdentifier: 
-  _itemType: 1
   _weight: 0.01
   _icon: {fileID: 21300000, guid: 0277eff01f91af74294993181bd732cd, type: 3}
-  _weaponAmmo: 1
+  _ammoType: 1
   _maxCount: 55

@@ -6,14 +6,28 @@ namespace InventoryTest
 {
     public class HeadItemController : InventoryItemController, IHead
     {
+        private HeadModel _headData;
         public HeadModel GetHeadData()
         {
-            return (HeadModel)ItemData;
+            return _headData;
         }
 
-        public override bool IsSameItemClass(InventoryItemController item)
+        public override bool IsSameItemClass(GameObject item)
         {
-            return (item is HeadItemController && ((HeadModel) item.ItemData).Head == GetHeadData().Head);
+            IHead current = item.GetComponent<IHead>();
+            if (current != null && current.GetHeadData().Head == _headData.Head) return true;
+            return false;
+        }
+
+        public override void SetData<T>(T itemData)
+        {
+            _headData = itemData as HeadModel;
+            RefreshView();
+        }
+
+        protected override InventoryItemModel GetData()
+        {
+            return _headData;
         }
 
         /*public override bool IsSameItemClass(InventoryItemModel model)

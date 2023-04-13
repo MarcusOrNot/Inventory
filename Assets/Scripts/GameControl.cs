@@ -39,7 +39,7 @@ namespace InventoryTest
                     var ammoModel = new AmmoModel(info.WeaponAmmo, info.MaxCount, info.Icon, info.Weight, info.MaxCount);
                     _inventory.AddItemByModel(ammoModel, randSlot);
                     emptySlots.Remove(randSlot); */
-                    AddItemInRandomSlot(new AmmoModel(info.WeaponAmmo, info.MaxCount, info.Icon, info.Weight, info.MaxCount), emptySlots);
+                    AddItemInRandomSlot(new AmmoModel(info.AmmoType, info.MaxCount, info.Icon, info.Weight, info.MaxCount), emptySlots);
 
             });
         }
