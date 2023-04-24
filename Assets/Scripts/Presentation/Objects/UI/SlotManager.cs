@@ -22,33 +22,27 @@ namespace InventoryTest
             _currentItem.GetComponent<Transform>().SetParent(this.GetComponent<Transform>());
             _currentItem.GetComponent<RectTransform>().localPosition = Vector2.zero;
         }
-
         public InventoryItemController GetItem()
         {
             return _currentItem;
         }
-
         public InventoryItemModel GetModel()
         {
             if (_currentItem != null) return _currentItem.ItemData;
             else return null;
         }
-
         public void DestroySlotItem()
         {
             _currentItem?.DestroyItem();
         }
-
         public bool IsEmpty()
         {
             return _currentItem == null;
         }
-
         public void SetLockedView(bool isLocked)
         {
             _lockImage.gameObject.SetActive(isLocked);
         }
-
         public bool PlaceItem(GameObject objectToPlace)
         {
             if (UseCase.IsFreeAndReady() && objectToPlace.GetComponent<InventoryItemController>()!=null)
@@ -58,18 +52,10 @@ namespace InventoryTest
             }
             return false;
         }
-
         public void DetachSlotItem()
         {
             _currentItem = null;
         }
-
         public SlotUseCase UseCase => _slotUseCase;
-        //public InventoryItemModel GetItem() => _currentItem;
-
-        /*InventoryItemModel ISlot.GetItem()
-        {
-            //return _currentItem.;
-        } */
     }
 }

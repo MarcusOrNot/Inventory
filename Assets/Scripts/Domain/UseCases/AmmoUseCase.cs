@@ -10,7 +10,6 @@ namespace InventoryTest
         private IAmmo _ammo;
         public AmmoUseCase(IAmmo ammo)
         {
-            //Debug.Log("Now init use case");
             _ammo = ammo;
         }
         public void SpendBullet()
@@ -21,7 +20,6 @@ namespace InventoryTest
                 _ammo.RefreshView();
             }
             else _ammo.DestroyItem();
-            //Debug.Log("Now spent "+count.ToString());
         }
         public void ReloadAmmo()
         {

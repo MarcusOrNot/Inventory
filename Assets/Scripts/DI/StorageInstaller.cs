@@ -6,13 +6,15 @@ namespace InventoryTest
     public class StorageInstaller : MonoInstaller
     {
         [SerializeField] private ItemsInfo _itemsInfo;
-        [SerializeField] private InventoryStorage _inventoryStorage;
-        [SerializeField] private GameStorage _gameStorage;
+        [SerializeField] private DefaultGameData _defaultGameData;
         public override void InstallBindings()
         {
             Container.Bind<ItemsInfo>().FromInstance(_itemsInfo).AsSingle().NonLazy();
-            Container.Bind<InventoryStorage>().FromInstance(_inventoryStorage).AsSingle().NonLazy();
-            Container.Bind<GameStorage>().FromInstance(_gameStorage).AsSingle().NonLazy();
+            Container.Bind<DefaultGameData>().FromInstance(_defaultGameData).AsSingle();
+            Container.Bind<IDefaultConfig>().To<DefaultConfigImpl>().FromNew().AsSingle();
+            Container.Bind<ISaveGame>().To<SerializedSaveGame>().FromNew().AsSingle();
+            Container.Bind<SavedDataUseCase>().FromNew().AsSingle();
+            Container.Bind<GameInfoUseCase>().FromNew().AsSingle();
         }
     }
 }

@@ -17,14 +17,5 @@ namespace InventoryTest
         {
             return ItemType.Ammo;
         }
-
-        /*public override void SetData(InventoryItemModel model)
-        {
-            AmmoModel data = (AmmoModel)model;
-            _weight = data.Weight;
-            _icon = data.Icon;
-            _ammoType = data.AmmoType;
-            _maxCount = data.MaxCount;
-        } */
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace InventoryTest
@@ -11,9 +12,8 @@ namespace InventoryTest
         [Inject] private InventoryManager _inventory;
         [Inject] private GameInfoUseCase _gameInfo;
         [Inject] private GameInfoPanelManager _gameInfoPanel;
-        //[Inject] private InventoryManager _inventory;
-        //[Inject] private WeaponItemController _weaponPrefub;
-
+        [Inject] private SavedDataUseCase _saveGame;
+        [Inject] private IDefaultConfig _defaultGameData;
         public void RandomShoot()
         {
             var ammoItems = _inventory.Slots.FindAll(s=>s.GetModel()?.Item == ItemType.Ammo);
@@ -26,24 +26,15 @@ namespace InventoryTest
             {
                 Debug.Log("Has now ammo for shooting!!!");
             }
-            //
-            //((AmmoItemController)ammoItems[0]).SpendSome();
         }
-
         public void AddRandomAmmo()
         {
             var emptySlots = _inventory.Slots.FindAll(s=>s.UseCase.IsFreeAndReady());
             _itemsInfo.AmmoList.ForEach(info=>
             {
-                    /*var randSlot = emptySlots[Random.Range(0, emptySlots.Count)];
-                    var ammoModel = new AmmoModel(info.WeaponAmmo, info.MaxCount, info.Icon, info.Weight, info.MaxCount);
-                    _inventory.AddItemByModel(ammoModel, randSlot);
-                    emptySlots.Remove(randSlot); */
-                    AddItemInRandomSlot(new AmmoModel(info.AmmoType, info.MaxCount, info.Icon, info.Weight, info.MaxCount), emptySlots);
-
+                AddItemInRandomSlot(new AmmoModel(info.AmmoType, info.MaxCount, info.Icon, info.Weight, info.MaxCount), emptySlots);
             });
         }
-
         public void AddRandomItem()
         {
             var emptySlots = _inventory.Slots.FindAll(s => s.UseCase.IsFreeAndReady());
@@ -54,7 +45,6 @@ namespace InventoryTest
             var torsoData = _itemsInfo.TorsoList[Random.Range(0, _itemsInfo.TorsoList.Count)];
             AddItemInRandomSlot(new TorsoModel(torsoData.Torso, torsoData.Deffence, torsoData.Icon, torsoData.Weight, 1), emptySlots);
         }
-
         private void AddItemInRandomSlot(InventoryItemModel itemModel, List<SlotManager> inSlots)
         {
             if (inSlots.Count > 0)
@@ -69,7 +59,6 @@ namespace InventoryTest
                 return;
             }
         }
-
         public void DeleteRandomItem()
         {
             var itemSlots = _inventory.Slots.FindAll(s => s.IsEmpty()==false);
@@ -83,10 +72,9 @@ namespace InventoryTest
                 Debug.Log("All slots are empty");
             }
         }
-
         public void TryUnblockSlot()
         {
-            if (_inventory.Slots.Count>_inventory.Storage.UnblockedSlots && _gameInfo.TrySpendMoney(_inventory.Storage.UnblockPrice))
+            if (_inventory.GetBlockedSlotsCount()>0 && _gameInfo.TrySpendMoney(_defaultGameData.GetUnblockPrice()))
             {
                 _gameInfoPanel.RefreshBalance();
                 _inventory.UnblockSlot();
@@ -96,7 +84,16 @@ namespace InventoryTest
         }
         public void SaveData()
         {
-            _inventory.SaveCurrentData();
+            var items = new List<InventoryItemModel>();
+            _inventory.Slots.ForEach((slot) => items.Add(slot.GetModel()));
+            _saveGame.SaveGame(new GameDataModel(_gameInfo.Balance, _inventory.GetBlockedSlotsCount(), items));
+            Debug.Log("Now data saved!");
+        }
+        public void RestoreDefaults()
+        {
+            _saveGame.DeleteSaveGame();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            Debug.Log("Savedata deleted!");
         }
     }
 }

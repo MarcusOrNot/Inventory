@@ -16,13 +16,5 @@ namespace InventoryTest
         {
             return ItemType.Torso;
         }
-
-        /*public override void SetData(InventoryItemModel model)
-        {
-            TorsoModel data = (TorsoModel)model;
-            _weight = data.Weight;
-            _icon = data.Icon;
-            _defence = data.Deffence;
-        } */
     }
 }

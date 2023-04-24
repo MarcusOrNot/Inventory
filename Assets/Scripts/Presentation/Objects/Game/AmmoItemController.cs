@@ -17,30 +17,21 @@ namespace InventoryTest
         {
             return _ammoData;
         }
-
         public override void SetData<T>(T itemData)
         {
             _ammoData = itemData as AmmoModel;
             RefreshView();
         }
-
         protected override InventoryItemModel GetData()
         {
             return _ammoData;
         }
-
         public override bool IsSameItemClass(GameObject item)
         {
             IAmmo current = item.GetComponent<IAmmo>();
             if (current != null && current.GetAmmoData().AmmoType == _ammoData.AmmoType) return true;
             return false;
         }
-
-        /*public override bool IsSameItemClass(InventoryItemModel model)
-        {
-            return (model is AmmoModel);
-        }*/
-
         public AmmoUseCase UseCase => _ammoUseCase;
     }
 }

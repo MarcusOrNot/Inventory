@@ -17,19 +17,5 @@ namespace InventoryTest
         {
             return ItemType.Weapon;
         }
-
-        /*public override void SetData(InventoryItemModel model)
-        {
-            WeaponModel data = (WeaponModel)model;
-            _weight = data.Weight;
-            _icon = data.Icon;
-            _weapon = data.Weapon;
-            _damage = data.Damage;
-        } */
-
-        /*public override InventoryItemModel GetModel()
-        {
-            return new WeaponModel(Weapon, Damage, Icon, Weight, 0);
-        }*/
     }
 }

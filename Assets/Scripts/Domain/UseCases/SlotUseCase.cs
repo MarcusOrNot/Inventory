@@ -27,5 +27,6 @@ namespace InventoryTest
         {
             return _slotRepo.IsEmpty() && !Locked;
         }
+        public SlotModel SlotData => data;
     }
 }

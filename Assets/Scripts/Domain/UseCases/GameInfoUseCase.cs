@@ -7,20 +7,25 @@ namespace InventoryTest
 {
     public class GameInfoUseCase
     {
-        [Inject] private IGameInfo _gameInfoRepo;
-        public void AddMoney(float profit)
+        int currentMoney = 0;
+        [Inject]
+        public GameInfoUseCase(SavedDataUseCase _savedData)
         {
-            _gameInfoRepo.Money += profit;
+            currentMoney = _savedData.GetMoney();
         }
-        public bool TrySpendMoney(float expenses)
+        public void AddMoney(int profit)
         {
-            if (expenses <= _gameInfoRepo.Money)
+            currentMoney += profit;
+        }
+        public bool TrySpendMoney(int expenses)
+        {
+            if (expenses <= currentMoney)
             {
-                _gameInfoRepo.Money -= Mathf.Min(_gameInfoRepo.Money, expenses);
+                currentMoney -= Mathf.Min(currentMoney, expenses);
                 return true;
             }
             else return false;
         }
-        public float Balance => _gameInfoRepo.Money;
+        public int Balance => currentMoney;
     }
 }

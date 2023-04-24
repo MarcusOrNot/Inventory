@@ -7,11 +7,11 @@ namespace InventoryTest
     [System.Serializable]
     public class InventoryItemModel
     {
-        [HideInInspector] public ItemType Item;
-        [HideInInspector] public int ItemVersion;
-        [HideInInspector] public Sprite Icon;
-        [HideInInspector] public float Weight;
-        [HideInInspector] public int Count;
+        public ItemType Item;
+        public int ItemVersion;
+        public Sprite Icon;
+        public float Weight;
+        public int Count;
 
         public InventoryItemModel(ItemType itemType, int itemVersion, Sprite icon, float weight, int count)
         {

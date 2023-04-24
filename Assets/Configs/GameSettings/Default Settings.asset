@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c932b1583865f542af7b695c10205e0, type: 3}
-  m_Name: Game Storage Data
+  m_Script: {fileID: 11500000, guid: db045cb0978edc74892cf14d279cb586, type: 3}
+  m_Name: Default Settings
   m_EditorClassIdentifier: 
-  Money: 320
+  StartMoney: 300
+  StartBlocked: 15
+  UnblockPrice: 20

@@ -37,7 +37,7 @@ namespace InventoryTest
                     return (T)Convert.ChangeType(new TorsoModel(torso.Torso, torso.Deffence, torso.Icon, torso.Weight, itemBase.Count), typeof(T));
             }
 
-            return null; //(T)Convert.ChangeType(_weaponsList[0], typeof(T));
+            return null;
         }
     }
 }

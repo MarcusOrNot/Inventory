@@ -14,7 +14,6 @@ namespace InventoryTest
         {
             RefreshBalance();
         }
-
         public void RefreshBalance()
         {
             _balanceText.text = _gameInfo.Balance.ToString()+"$";
